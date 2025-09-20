@@ -1,5 +1,5 @@
-import geometry.model.Point;
-import geometry.areas.implementations.SectorArea;
+import ru.ifmo.se.gmt.geometry.model.Point;
+import ru.ifmo.se.gmt.geometry.areas.implementations.SectorArea;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,9 +1,9 @@
-import parser.JsonAreasConfigParser;
-import request.implementations.areas.RectangleAreaRequest;
-import request.implementations.areas.SectorAreaRequest;
-import request.implementations.areas.TriangleAreaRequest;
-import request.implementations.messages.AreasRequest;
-import request.interfaces.AreaRequest;
+import ru.ifmo.se.gmt.parser.JsonAreasConfigParser;
+import ru.ifmo.se.gmt.request.implementations.areas.RectangleAreaRequest;
+import ru.ifmo.se.gmt.request.implementations.areas.SectorAreaRequest;
+import ru.ifmo.se.gmt.request.implementations.areas.TriangleAreaRequest;
+import ru.ifmo.se.gmt.request.implementations.messages.AreasRequest;
+import ru.ifmo.se.gmt.request.interfaces.AreaRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,5 +1,5 @@
-import geometry.model.Point;
-import geometry.areas.implementations.TriangleArea;
+import ru.ifmo.se.gmt.geometry.model.Point;
+import ru.ifmo.se.gmt.geometry.areas.implementations.TriangleArea;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,15 +1,15 @@
-import geometry.areas.factory.creators.implementations.RectangleAreaCreator;
-import geometry.areas.factory.creators.implementations.SectorAreaCreator;
-import geometry.areas.factory.creators.implementations.TriangleAreaCreator;
-import geometry.areas.implementations.RectangleArea;
-import geometry.areas.implementations.SectorArea;
-import geometry.areas.implementations.TriangleArea;
-import geometry.areas.interfaces.Area;
-import geometry.model.Point;
-import request.implementations.areas.RectangleAreaRequest;
-import request.implementations.areas.SectorAreaRequest;
-import request.implementations.areas.TriangleAreaRequest;
-import request.interfaces.AreaRequest;
+import ru.ifmo.se.gmt.geometry.areas.factory.creators.implementations.RectangleAreaCreator;
+import ru.ifmo.se.gmt.geometry.areas.factory.creators.implementations.SectorAreaCreator;
+import ru.ifmo.se.gmt.geometry.areas.factory.creators.implementations.TriangleAreaCreator;
+import ru.ifmo.se.gmt.geometry.areas.implementations.RectangleArea;
+import ru.ifmo.se.gmt.geometry.areas.implementations.SectorArea;
+import ru.ifmo.se.gmt.geometry.areas.implementations.TriangleArea;
+import ru.ifmo.se.gmt.geometry.areas.interfaces.Area;
+import ru.ifmo.se.gmt.geometry.model.Point;
+import ru.ifmo.se.gmt.request.implementations.areas.RectangleAreaRequest;
+import ru.ifmo.se.gmt.request.implementations.areas.SectorAreaRequest;
+import ru.ifmo.se.gmt.request.implementations.areas.TriangleAreaRequest;
+import ru.ifmo.se.gmt.request.interfaces.AreaRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
