@@ -12,5 +12,5 @@ import java.math.BigDecimal;
  * @param widthK скаляр для ширины (на сколько нужно умножить радиус, чтобы получить ширину).
  * @param heightK скаляр для длины (на сколько нужно умножить радиус, чтобы получить длину).
  */
-public record RectangleAreaRequest(BigDecimal x, BigDecimal y, BigDecimal widthK, BigDecimal heightK)
+public record RectangleAreaRequest(BigDecimal x, BigDecimal y, String format, BigDecimal widthK, BigDecimal heightK)
         implements AreaRequest {}

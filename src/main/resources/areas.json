@@ -4,6 +4,7 @@
       "type": "rectangle",
       "x": 0,
       "y": 0,
+      "format": "lower-left",
       "widthK": 0.5,
       "heightK": 1
     },

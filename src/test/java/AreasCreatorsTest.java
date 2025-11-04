@@ -21,14 +21,14 @@ public class AreasCreatorsTest {
     @Test
     @DisplayName("Создание прямоугольной области")
     void TriangleAreaCreatorTestRectangleAreaCreatorTest()  {
-        AreaRequest r = new RectangleAreaRequest(new BigDecimal("0"), new BigDecimal("0"),
+        AreaRequest r = new RectangleAreaRequest(new BigDecimal("0"), new BigDecimal("0"), "lower-left",
                 new BigDecimal("0.5"), new BigDecimal("1"));
         RectangleAreaCreator rectangleAreaCreator = new RectangleAreaCreator();
 
         Area newArea = rectangleAreaCreator.createArea(r, new BigDecimal("5"));
 
         RectangleArea rectangleArea = new RectangleArea(new Point(new BigDecimal("0"), new BigDecimal("0")),
-                new BigDecimal("2.5"), new BigDecimal("5"));
+                "lower-left", new BigDecimal("2.5"), new BigDecimal("5"));
 
         assertEquals(newArea, rectangleArea);
     }

@@ -13,6 +13,7 @@ public class RectangleArea implements Area {
     private final Point leftLowerPoint;
     private final BigDecimal height;
     private final BigDecimal width;
+    private final String format;
 
     /**
      * Конструктор класса прямоугольной области.
@@ -22,10 +23,11 @@ public class RectangleArea implements Area {
      * @param height высота прямоугольника (величина по оси y).
      * @param width ширина прямоугольника (величина по оси x).
      */
-    public RectangleArea(Point point, BigDecimal width, BigDecimal height) {
+    public RectangleArea(Point point, String format, BigDecimal width, BigDecimal height) {
         this.leftLowerPoint = point;
         this.height = height;
         this.width = width;
+        this.format = format;
     }
 
     /**
@@ -37,15 +39,29 @@ public class RectangleArea implements Area {
      */
     @Override
     public boolean checkPoint(Point point) {
-        BigDecimal x = leftLowerPoint.getX();
-        BigDecimal y = leftLowerPoint.getY();
+        BigDecimal x0 = leftLowerPoint.getX();
+        BigDecimal y0 = leftLowerPoint.getY();
 
-        BigDecimal x0 = point.getX();
-        BigDecimal y0 = point.getY();
+        BigDecimal x = point.getX();
+        BigDecimal y = point.getY();
 
-        return (x0.compareTo(x) >= 0 && x0.compareTo(x.add(width)) <= 0 &&
-                y0.compareTo(y) >= 0 && y0.compareTo(y.add(height)) <= 0);
+        return switch (format) {
+            case "lower-left" ->
+                    (x.compareTo(x0) >= 0 && x.compareTo(x0.add(width)) <= 0 &&
+                            y.compareTo(y0) >= 0 && y.compareTo(y0.add(height)) <= 0);
+            case "lower-right" ->
+                    (x.compareTo(x0.subtract(width)) >= 0 && x.compareTo(x0) <= 0 &&
+                            y.compareTo(y0) >= 0 && y.compareTo(y0.add(height)) <= 0);
+            case "upper-left" ->
+                    (x.compareTo(x0) >= 0 && x.compareTo(x0.add(width)) <= 0 &&
+                            y.compareTo(y0.subtract(height)) >= 0 && y.compareTo(y0) <= 0);
+            case "upper-right" ->
+                    (x.compareTo(x0.subtract(width)) >= 0 && x.compareTo(x0) <= 0 &&
+                            y.compareTo(y0.subtract(height)) >= 0 && y.compareTo(y0) <= 0);
+            default -> false;
+        };
     }
+
 
     @Override
     public boolean equals(Object o) {

@@ -47,8 +47,9 @@ public class JsonAreasConfigParser {
                     BigDecimal y = areaInfo.get("y").getAsBigDecimal();
                     BigDecimal widthK = areaInfo.get("widthK").getAsBigDecimal();
                     BigDecimal heightK = areaInfo.get("heightK").getAsBigDecimal();
+                    String format = areaInfo.get("format").getAsString();
 
-                    areaRequests.add(new RectangleAreaRequest(x, y, widthK, heightK));
+                    areaRequests.add(new RectangleAreaRequest(x, y, format, widthK, heightK));
                     break;
 
                 case "triangle":

@@ -26,10 +26,11 @@ public class RectangleAreaCreator implements AreaCreator {
        if (areaRequest instanceof RectangleAreaRequest rectangleAreaRequest) {
            BigDecimal x = rectangleAreaRequest.x();
            BigDecimal y = rectangleAreaRequest.y();
+           String format = rectangleAreaRequest.format();
            BigDecimal width = rectangleAreaRequest.widthK().multiply(radius);
            BigDecimal height = rectangleAreaRequest.heightK().multiply(radius);
 
-           return new RectangleArea(new Point(x, y), width, height);
+           return new RectangleArea(new Point(x, y), format, width, height);
        }
        return null;
     }
