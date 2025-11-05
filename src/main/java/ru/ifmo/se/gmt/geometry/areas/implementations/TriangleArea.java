@@ -60,7 +60,8 @@ public class TriangleArea implements Area {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof TriangleArea triangleArea) {
+        if (o instanceof TriangleArea) {
+            TriangleArea triangleArea = (TriangleArea) o;
             return Objects.equals(pointA, triangleArea.pointA) &&
                     Objects.equals(pointB, triangleArea.pointB) &&
                     Objects.equals(pointC, triangleArea.pointC);

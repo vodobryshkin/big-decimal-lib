@@ -45,27 +45,29 @@ public class RectangleArea implements Area {
         BigDecimal x = point.getX();
         BigDecimal y = point.getY();
 
-        return switch (format) {
-            case "lower-left" ->
-                    (x.compareTo(x0) >= 0 && x.compareTo(x0.add(width)) <= 0 &&
+        switch (format) {
+            case "lower-left":
+                    return (x.compareTo(x0) >= 0 && x.compareTo(x0.add(width)) <= 0 &&
                             y.compareTo(y0) >= 0 && y.compareTo(y0.add(height)) <= 0);
-            case "lower-right" ->
-                    (x.compareTo(x0.subtract(width)) >= 0 && x.compareTo(x0) <= 0 &&
+            case "lower-right":
+                    return (x.compareTo(x0.subtract(width)) >= 0 && x.compareTo(x0) <= 0 &&
                             y.compareTo(y0) >= 0 && y.compareTo(y0.add(height)) <= 0);
-            case "upper-left" ->
-                    (x.compareTo(x0) >= 0 && x.compareTo(x0.add(width)) <= 0 &&
+            case "upper-left":
+                    return (x.compareTo(x0) >= 0 && x.compareTo(x0.add(width)) <= 0 &&
                             y.compareTo(y0.subtract(height)) >= 0 && y.compareTo(y0) <= 0);
-            case "upper-right" ->
-                    (x.compareTo(x0.subtract(width)) >= 0 && x.compareTo(x0) <= 0 &&
+            case "upper-right":
+                    return (x.compareTo(x0.subtract(width)) >= 0 && x.compareTo(x0) <= 0 &&
                             y.compareTo(y0.subtract(height)) >= 0 && y.compareTo(y0) <= 0);
-            default -> false;
-        };
+            default:
+                return false;
+        }
     }
 
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof RectangleArea rectangleArea) {
+        if (o instanceof RectangleArea) {
+            RectangleArea rectangleArea = (RectangleArea) o;
             return Objects.equals(leftLowerPoint, rectangleArea.leftLowerPoint) &&
                     Objects.equals(height, rectangleArea.height) &&
                     Objects.equals(width, rectangleArea.width);

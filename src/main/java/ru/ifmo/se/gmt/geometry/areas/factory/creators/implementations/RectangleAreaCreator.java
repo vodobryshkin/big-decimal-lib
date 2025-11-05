@@ -23,7 +23,8 @@ public class RectangleAreaCreator implements AreaCreator {
      */
     @Override
     public Area createArea(AreaRequest areaRequest, BigDecimal radius) {
-       if (areaRequest instanceof RectangleAreaRequest rectangleAreaRequest) {
+       if (areaRequest instanceof RectangleAreaRequest) {
+           RectangleAreaRequest rectangleAreaRequest = (RectangleAreaRequest) areaRequest;
            BigDecimal x = rectangleAreaRequest.getX();
            BigDecimal y = rectangleAreaRequest.getY();
            String format = rectangleAreaRequest.getFormat();

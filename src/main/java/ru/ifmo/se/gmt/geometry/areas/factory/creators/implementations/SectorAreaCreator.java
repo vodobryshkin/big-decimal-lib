@@ -22,7 +22,8 @@ public class SectorAreaCreator implements AreaCreator {
      */
     @Override
     public Area createArea(AreaRequest areaRequest, BigDecimal radius) {
-        if (areaRequest instanceof SectorAreaRequest sectorAreaRequest) {
+        if (areaRequest instanceof SectorAreaRequest) {
+            SectorAreaRequest sectorAreaRequest = (SectorAreaRequest) areaRequest;
             BigDecimal xC = sectorAreaRequest.getXC();
             BigDecimal yC = sectorAreaRequest.getYC();
             BigDecimal radiusK = sectorAreaRequest.getRadiusK().multiply(radius);

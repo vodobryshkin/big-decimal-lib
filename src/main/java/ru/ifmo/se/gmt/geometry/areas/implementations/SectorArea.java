@@ -84,7 +84,8 @@ public class SectorArea implements Area {
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof SectorArea sectorArea) {
+        if (o instanceof SectorArea) {
+            SectorArea sectorArea = (SectorArea) o;
             return Objects.equals(centerPoint, sectorArea.centerPoint) &&
                     Objects.equals(radius, sectorArea.radius) &&
                     Objects.equals(angleStart, sectorArea.angleStart) &&

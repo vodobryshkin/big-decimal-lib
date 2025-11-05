@@ -23,7 +23,8 @@ public class TriangleAreaCreator  implements AreaCreator {
      */
     @Override
     public Area createArea(AreaRequest areaRequest, BigDecimal radius) {
-        if (areaRequest instanceof TriangleAreaRequest triangleAreaRequest) {
+        if (areaRequest instanceof TriangleAreaRequest) {
+            TriangleAreaRequest triangleAreaRequest = (TriangleAreaRequest) areaRequest;
             BigDecimal xA = triangleAreaRequest.getXA();
             BigDecimal yA = triangleAreaRequest.getYA();
 
