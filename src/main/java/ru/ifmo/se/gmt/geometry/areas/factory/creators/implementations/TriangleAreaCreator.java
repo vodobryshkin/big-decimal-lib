@@ -24,14 +24,14 @@ public class TriangleAreaCreator  implements AreaCreator {
     @Override
     public Area createArea(AreaRequest areaRequest, BigDecimal radius) {
         if (areaRequest instanceof TriangleAreaRequest triangleAreaRequest) {
-            BigDecimal xA = triangleAreaRequest.xA();
-            BigDecimal yA = triangleAreaRequest.yA();
+            BigDecimal xA = triangleAreaRequest.getXA();
+            BigDecimal yA = triangleAreaRequest.getYA();
 
-            BigDecimal xB = triangleAreaRequest.xBK().multiply(radius);
-            BigDecimal yB = triangleAreaRequest.yBK().multiply(radius);
+            BigDecimal xB = triangleAreaRequest.getXBK().multiply(radius);
+            BigDecimal yB = triangleAreaRequest.getYBK().multiply(radius);
 
-            BigDecimal xC = triangleAreaRequest.xCK().multiply(radius);
-            BigDecimal yC = triangleAreaRequest.yCK().multiply(radius);
+            BigDecimal xC = triangleAreaRequest.getXCK().multiply(radius);
+            BigDecimal yC = triangleAreaRequest.getYCK().multiply(radius);
 
             return new TriangleArea(new Point(xA, yA), new Point(xB, yB), new Point(xC, yC));
         }

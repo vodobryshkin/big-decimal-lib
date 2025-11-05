@@ -23,11 +23,11 @@ public class SectorAreaCreator implements AreaCreator {
     @Override
     public Area createArea(AreaRequest areaRequest, BigDecimal radius) {
         if (areaRequest instanceof SectorAreaRequest sectorAreaRequest) {
-            BigDecimal xC = sectorAreaRequest.xC();
-            BigDecimal yC = sectorAreaRequest.yC();
-            BigDecimal radiusK = sectorAreaRequest.radiusK().multiply(radius);
-            BigDecimal startAngleK = sectorAreaRequest.startAngleK().multiply(new BigDecimal(Math.PI));
-            BigDecimal endAngleK = sectorAreaRequest.endAngleK().multiply(new BigDecimal(Math.PI));
+            BigDecimal xC = sectorAreaRequest.getXC();
+            BigDecimal yC = sectorAreaRequest.getYC();
+            BigDecimal radiusK = sectorAreaRequest.getRadiusK().multiply(radius);
+            BigDecimal startAngleK = sectorAreaRequest.getStartAngleK().multiply(new BigDecimal(Math.PI));
+            BigDecimal endAngleK = sectorAreaRequest.getEndAngleK().multiply(new BigDecimal(Math.PI));
 
             return new SectorArea(new Point(xC, yC), radiusK, startAngleK, endAngleK);
         }

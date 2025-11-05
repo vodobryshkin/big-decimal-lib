@@ -24,11 +24,11 @@ public class RectangleAreaCreator implements AreaCreator {
     @Override
     public Area createArea(AreaRequest areaRequest, BigDecimal radius) {
        if (areaRequest instanceof RectangleAreaRequest rectangleAreaRequest) {
-           BigDecimal x = rectangleAreaRequest.x();
-           BigDecimal y = rectangleAreaRequest.y();
-           String format = rectangleAreaRequest.format();
-           BigDecimal width = rectangleAreaRequest.widthK().multiply(radius);
-           BigDecimal height = rectangleAreaRequest.heightK().multiply(radius);
+           BigDecimal x = rectangleAreaRequest.getX();
+           BigDecimal y = rectangleAreaRequest.getY();
+           String format = rectangleAreaRequest.getFormat();
+           BigDecimal width = rectangleAreaRequest.getWidthK().multiply(radius);
+           BigDecimal height = rectangleAreaRequest.getHeightK().multiply(radius);
 
            return new RectangleArea(new Point(x, y), format, width, height);
        }

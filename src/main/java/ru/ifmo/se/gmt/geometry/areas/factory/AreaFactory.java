@@ -33,7 +33,7 @@ public class AreaFactory {
     public List<Area> createAreas(AreasRequest areasRequest, BigDecimal radius) {
         List<Area> areaList = new ArrayList<>();
 
-        for (AreaRequest areaRequest: areasRequest.areaRequests()) {
+        for (AreaRequest areaRequest: areasRequest.getAreaRequests()) {
             if (areaRequest instanceof RectangleAreaRequest) {
                 setAreaCreator(new RectangleAreaCreator());
             } else if (areaRequest instanceof TriangleAreaRequest) {

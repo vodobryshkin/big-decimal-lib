@@ -37,7 +37,7 @@ public class JsonAreasConfigParserTest {
         boolean status = true;
 
         for (int i = 0; i < areaRequestList.size(); i++) {
-            if (!areaRequestList.get(i).equals(areasRequestFromParser.areaRequests().get(i))) {
+            if (!areaRequestList.get(i).equals(areasRequestFromParser.getAreaRequests().get(i))) {
                 System.out.println();
                 status = false;
                 break;
