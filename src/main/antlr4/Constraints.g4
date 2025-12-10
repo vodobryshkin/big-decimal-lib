@@ -1,12 +1,15 @@
 grammar Constraints;
 
-constraint
-    : formula (booleanSymbol formula)* EOF
-    ;
+@header { package ru.ifmo.se.gmt.parser; }
 
 formula
+    : constraint (booleanSymbol constraint)* EOF
+    ;
+
+constraint
     : expr parSymbol expr
     ;
+
 
 parSymbol
     : GT
