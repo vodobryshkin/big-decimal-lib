@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 /**
  * Класс для автоматического создания круглых областей.
  */
+@Deprecated
 public class SectorAreaCreator implements AreaCreator {
     /**
      * Метод для создания области по переданному запросу.

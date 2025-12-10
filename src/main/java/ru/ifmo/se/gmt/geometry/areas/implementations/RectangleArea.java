@@ -9,6 +9,7 @@ import java.util.Objects;
 /**
  * Класс, реализующий прямоугольную область.
  */
+@Deprecated
 public class RectangleArea implements Area {
     private final Point leftLowerPoint;
     private final BigDecimal height;

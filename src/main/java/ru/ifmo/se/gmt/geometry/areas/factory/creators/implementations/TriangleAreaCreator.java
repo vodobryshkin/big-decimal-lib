@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 /**
  * Класс для автоматического создания треугольных областей.
  */
+@Deprecated
 public class TriangleAreaCreator  implements AreaCreator {
     /**
      * Метод для создания области по переданному запросу.

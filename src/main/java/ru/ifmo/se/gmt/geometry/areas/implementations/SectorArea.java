@@ -11,6 +11,7 @@ import java.util.Objects;
  * Класс, реализующий область в виде сектора.
  */
 @Getter
+@Deprecated
 public class SectorArea implements Area {
     private final Point centerPoint;
     private final BigDecimal radius;

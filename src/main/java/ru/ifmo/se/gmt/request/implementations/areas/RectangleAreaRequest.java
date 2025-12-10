@@ -9,6 +9,7 @@ import java.math.BigDecimal;
  * Класс для реализации запроса на создание прямоугольной области.
  */
 @Data
+@Deprecated
 public class RectangleAreaRequest implements AreaRequest {
     private final BigDecimal x;
     private final BigDecimal y;

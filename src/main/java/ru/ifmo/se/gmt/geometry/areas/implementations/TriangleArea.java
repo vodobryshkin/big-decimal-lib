@@ -9,6 +9,7 @@ import java.util.Objects;
 /**
  * Класс, реализующий треугольную область.
  */
+@Deprecated
 public class TriangleArea implements Area {
     private final Point pointA;
     private final Point pointB;

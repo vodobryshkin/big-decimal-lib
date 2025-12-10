@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 /**
  * Класс для автоматического создания прямоугольных областей.
  */
+@Deprecated
 public class RectangleAreaCreator implements AreaCreator {
     /**
      * Метод для создания области по переданному запросу.
