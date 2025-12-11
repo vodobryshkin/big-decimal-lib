@@ -1,77 +1,94 @@
 package ru.ifmo.se.gmt.visitor;
 
+import ch.obermuhlner.math.big.BigDecimalMath;
 import ru.ifmo.se.gmt.parser.ConstraintsBaseVisitor;
 import ru.ifmo.se.gmt.parser.ConstraintsParser;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Map;
 
-public class EvalExprVisitor extends ConstraintsBaseVisitor<Double> {
-    private final Map<String, Double> vars;
+public class EvalExprVisitor extends ConstraintsBaseVisitor<BigDecimal> {
 
-    public EvalExprVisitor(Map<String, Double> vars) {
+    private final Map<String, BigDecimal> vars;
+    private final MathContext mc;
+
+    public EvalExprVisitor(Map<String, BigDecimal> vars, MathContext mc) {
         this.vars = vars;
+        this.mc = mc;
     }
 
     @Override
-    public Double visitExpr(ConstraintsParser.ExprContext ctx) {
+    public BigDecimal visitExpr(ConstraintsParser.ExprContext ctx) {
         return visit(ctx.sum());
     }
 
     @Override
-    public Double visitSum(ConstraintsParser.SumContext ctx) {
-        double result = visit(ctx.prod(0));
+    public BigDecimal visitSum(ConstraintsParser.SumContext ctx) {
+        BigDecimal result = visit(ctx.prod(0));
         for (int i = 1; i < ctx.prod().size(); i++) {
             String op = ctx.getChild(2 * i - 1).getText();
-            double rhs = visit(ctx.prod(i));
-            result = op.equals("+") ? result + rhs : result - rhs;
+            BigDecimal rhs = visit(ctx.prod(i));
+            if ("+".equals(op)) {
+                result = result.add(rhs, mc);
+            } else {
+                result = result.subtract(rhs, mc);
+            }
         }
         return result;
     }
 
     @Override
-    public Double visitProd(ConstraintsParser.ProdContext ctx) {
-        double result = visit(ctx.pow(0));
-
+    public BigDecimal visitProd(ConstraintsParser.ProdContext ctx) {
+        BigDecimal result = visit(ctx.pow(0));
         for (int i = 1; i < ctx.pow().size(); i++) {
             String op = ctx.getChild(2 * i - 1).getText();
-            double rhs = visit(ctx.pow(i));
-            result = op.equals("*") ? result * rhs : result / rhs;
+            BigDecimal rhs = visit(ctx.pow(i));
+            if ("*".equals(op)) {
+                result = result.multiply(rhs, mc);
+            } else {
+                // деление обязательно с MathContext
+                result = result.divide(rhs, mc);
+            }
         }
         return result;
     }
 
     @Override
-    public Double visitPow(ConstraintsParser.PowContext ctx) {
-        double result = visit(ctx.unary(0));
+    public BigDecimal visitPow(ConstraintsParser.PowContext ctx) {
+        // твой вариант: pow : unary (POW unary)*;  (левоассоциативно)
+        BigDecimal result = visit(ctx.unary(0));
         for (int i = 1; i < ctx.unary().size(); i++) {
-            double rhs = visit(ctx.unary(i));
-            result = Math.pow(result, rhs);
+            BigDecimal rhs = visit(ctx.unary(i));
+            result = BigDecimalMath.pow(result, rhs, mc);
         }
         return result;
     }
 
     @Override
-    public Double visitUnary(ConstraintsParser.UnaryContext ctx) {
-        double value = visit(ctx.atom());
+    public BigDecimal visitUnary(ConstraintsParser.UnaryContext ctx) {
+        BigDecimal value = visit(ctx.atom());
         if (ctx.getChildCount() == 2) {
             String sign = ctx.getChild(0).getText();
-            if ("-".equals(sign)) return -value;
+            if ("-".equals(sign)) {
+                return value.negate(mc);
+            }
         }
         return value;
     }
 
     @Override
-    public Double visitAtom(ConstraintsParser.AtomContext ctx) {
-        if (ctx.X() != null) return vars.getOrDefault("x", 0.0);
-        if (ctx.Y() != null) return vars.getOrDefault("y", 0.0);
-        if (ctx.R() != null) return vars.getOrDefault("r", 0.0);
+    public BigDecimal visitAtom(ConstraintsParser.AtomContext ctx) {
+        if (ctx.X() != null) return vars.getOrDefault("x", BigDecimal.ZERO);
+        if (ctx.Y() != null) return vars.getOrDefault("y", BigDecimal.ZERO);
+        if (ctx.R() != null) return vars.getOrDefault("r", BigDecimal.ZERO);
 
         if (ctx.number() != null) return visit(ctx.number());
         if (ctx.expr() != null && ctx.func() == null) return visit(ctx.expr());
 
         if (ctx.func() != null) {
             String f = ctx.func().getText();
-            double arg = visit(ctx.expr());
+            BigDecimal arg = visit(ctx.expr());
             return applyFunc(f, arg);
         }
 
@@ -79,32 +96,30 @@ public class EvalExprVisitor extends ConstraintsBaseVisitor<Double> {
     }
 
     @Override
-    public Double visitNumber(ConstraintsParser.NumberContext ctx) {
-        if (ctx.INT() != null) return Double.parseDouble(ctx.INT().getText());
-        return Double.parseDouble(ctx.FLOAT().getText());
+    public BigDecimal visitNumber(ConstraintsParser.NumberContext ctx) {
+        return new BigDecimal(ctx.getText(), mc);
     }
 
-    private double applyFunc(String f, double x) {
+    private BigDecimal applyFunc(String f, BigDecimal x) {
         switch (f) {
             case "sqrt":
-                return Math.sqrt(x);
+                return BigDecimalMath.sqrt(x, mc);
             case "sin":
-                return Math.sin(x);
+                return BigDecimalMath.sin(x, mc);
             case "cos":
-                return Math.cos(x);
+                return BigDecimalMath.cos(x, mc);
             case "tan":
-                return Math.tan(x);
+                return BigDecimalMath.tan(x, mc);
             case "ln":
-                return Math.log(x);
+                return BigDecimalMath.log(x, mc);   // натуральный логарифм
             case "log":
-                return Math.log10(x);
+                return BigDecimalMath.log10(x, mc); // log10
             case "exp":
-                return Math.exp(x);
+                return BigDecimalMath.exp(x, mc);
             case "abs":
-                return Math.abs(x);
+                return x.abs(mc);
             default:
                 throw new RuntimeException("Unknown func: " + f);
-
         }
     }
 }

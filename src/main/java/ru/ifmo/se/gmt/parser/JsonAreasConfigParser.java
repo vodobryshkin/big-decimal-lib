@@ -3,6 +3,7 @@ package ru.ifmo.se.gmt.parser;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import ru.ifmo.se.gmt.request.implementations.areas.FormulaAreaRequest;
 import ru.ifmo.se.gmt.request.implementations.areas.RectangleAreaRequest;
 import ru.ifmo.se.gmt.request.implementations.areas.SectorAreaRequest;
 import ru.ifmo.se.gmt.request.implementations.areas.TriangleAreaRequest;
@@ -72,6 +73,9 @@ public class JsonAreasConfigParser {
 
                     areaRequests.add(new SectorAreaRequest(xC, yC, radiusK, startAngleK, endAngleK));
                     break;
+                case "formula":
+                    String value = areaInfo.get("value").getAsString();
+                    areaRequests.add(new FormulaAreaRequest(value));
             }
         }
 

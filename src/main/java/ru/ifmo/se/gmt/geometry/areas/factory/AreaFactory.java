@@ -1,10 +1,12 @@
 package ru.ifmo.se.gmt.geometry.areas.factory;
 
+import ru.ifmo.se.gmt.geometry.areas.factory.creators.implementations.FormulaAreaCreator;
 import ru.ifmo.se.gmt.geometry.areas.factory.creators.implementations.RectangleAreaCreator;
 import ru.ifmo.se.gmt.geometry.areas.factory.creators.implementations.SectorAreaCreator;
 import ru.ifmo.se.gmt.geometry.areas.factory.creators.implementations.TriangleAreaCreator;
 import ru.ifmo.se.gmt.geometry.areas.factory.creators.interfaces.AreaCreator;
 import ru.ifmo.se.gmt.geometry.areas.interfaces.Area;
+import ru.ifmo.se.gmt.request.implementations.areas.FormulaAreaRequest;
 import ru.ifmo.se.gmt.request.implementations.areas.RectangleAreaRequest;
 import ru.ifmo.se.gmt.request.implementations.areas.SectorAreaRequest;
 import ru.ifmo.se.gmt.request.implementations.areas.TriangleAreaRequest;
@@ -40,6 +42,8 @@ public class AreaFactory {
                 setAreaCreator(new TriangleAreaCreator());
             } else if (areaRequest instanceof SectorAreaRequest) {
                 setAreaCreator(new SectorAreaCreator());
+            } else if (areaRequest instanceof FormulaAreaRequest) {
+                setAreaCreator(new FormulaAreaCreator());
             }
 
             areaList.add(areaCreator.createArea(areaRequest, radius));

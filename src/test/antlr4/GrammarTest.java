@@ -6,6 +6,8 @@ import ru.ifmo.se.gmt.parser.ConstraintsParser;
 import ru.ifmo.se.gmt.visitor.EvalExprVisitor;
 import ru.ifmo.se.gmt.visitor.EvalFormulaVisitor;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Map;
 
 public class GrammarTest {
@@ -33,8 +35,12 @@ public class GrammarTest {
 
         ParseTree tree = parser.formula();
 
-        var vars = Map.of("x", 0.0, "y", 6.0, "r", 5.0);
-        EvalExprVisitor exprVisitor = new EvalExprVisitor(vars);
+        BigDecimal x = new BigDecimal("0");
+        BigDecimal y = new BigDecimal("6");
+        BigDecimal r = new BigDecimal("5");
+
+        var vars = Map.of("x", x, "y", y, "r", r);
+        EvalExprVisitor exprVisitor = new EvalExprVisitor(vars, new MathContext(50));
         EvalFormulaVisitor formulaVisitor = new EvalFormulaVisitor(exprVisitor);
 
         boolean ok = formulaVisitor.visit(tree);
@@ -52,8 +58,12 @@ public class GrammarTest {
 
         ParseTree tree = parser.formula();
 
-        var vars = Map.of("x", 3.9, "y", 0.476, "r", 3.0);
-        EvalExprVisitor exprVisitor = new EvalExprVisitor(vars);
+        BigDecimal x = new BigDecimal("3.9");
+        BigDecimal y = new BigDecimal("0.47605");
+        BigDecimal r = new BigDecimal("3.0");
+
+        var vars = Map.of("x", x, "y", y, "r", r);
+        EvalExprVisitor exprVisitor = new EvalExprVisitor(vars, new MathContext(50));
         EvalFormulaVisitor formulaVisitor = new EvalFormulaVisitor(exprVisitor);
 
         boolean ok = formulaVisitor.visit(tree);
