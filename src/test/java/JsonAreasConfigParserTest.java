@@ -19,7 +19,7 @@ public class JsonAreasConfigParserTest {
     @DisplayName("Тест из варианта")
     void VariantTest() throws IOException {
         JsonAreasConfigParser jsonAreasConfigParser = new JsonAreasConfigParser();
-        AreasRequest areasRequestFromParser = jsonAreasConfigParser.parse("/home/vodobryshkin/progs/proj/IdeaProjects/big-decimal-geometry-web-labs/src/main/resources/areas.json");
+        AreasRequest areasRequestFromParser = jsonAreasConfigParser.parse("/home/vodobryshkin/progs/proj/IdeaProjects/big-decimal-geometry-web-labs/src/main/resources/areas1.json");
 
         AreaRequest r = new RectangleAreaRequest(new BigDecimal("0"), new BigDecimal("0"), "lower-left",
                 new BigDecimal("0.5"), new BigDecimal("1"));

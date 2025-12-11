@@ -36,8 +36,22 @@ https://se.ifmo.ru/courses/web), изначально планируя его п
 2. Класс JsonAreasConfigParser.
 3. Класс AreaFactory.
 
-Пример того, как в коде автоматически создаются области, можно посмотреть здесь:
-https://github.com/vodobryshkin/web-lab1/blob/master/backend/src/main/java/logic/CheckoutManager.java
+Для автоматического создания областей используется класс ```java CheckoutManager```. Пример использования:
+```java
+String areasPath;
+        try {
+            areas4Path = Paths.get(
+                    Objects.requireNonNull(getClass().getClassLoader().getResource("areas.json")).toURI()
+            ).toString();
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        CheckoutManager checkoutManager = new CheckoutManager(areas4Path);
+        CheckoutRequest checkoutRequest = new CheckoutRequest(new Point(new BigDecimal("-1"), new BigDecimal("-1.05")),
+                new BigDecimal("4"));
+
+        assertFalse(checkoutManager.checkRequest(checkoutRequest));
+```
 
 #### Конфигурационный файл
 Конфигурационный файл имеет следующую структуру:
