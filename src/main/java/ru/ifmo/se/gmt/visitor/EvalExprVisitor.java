@@ -47,7 +47,6 @@ public class EvalExprVisitor extends ConstraintsBaseVisitor<BigDecimal> {
             if ("*".equals(op)) {
                 result = result.multiply(rhs, mc);
             } else {
-                // деление обязательно с MathContext
                 result = result.divide(rhs, mc);
             }
         }
@@ -56,7 +55,6 @@ public class EvalExprVisitor extends ConstraintsBaseVisitor<BigDecimal> {
 
     @Override
     public BigDecimal visitPow(ConstraintsParser.PowContext ctx) {
-        // твой вариант: pow : unary (POW unary)*;  (левоассоциативно)
         BigDecimal result = visit(ctx.unary(0));
         for (int i = 1; i < ctx.unary().size(); i++) {
             BigDecimal rhs = visit(ctx.unary(i));
@@ -111,9 +109,9 @@ public class EvalExprVisitor extends ConstraintsBaseVisitor<BigDecimal> {
             case "tan":
                 return BigDecimalMath.tan(x, mc);
             case "ln":
-                return BigDecimalMath.log(x, mc);   // натуральный логарифм
+                return BigDecimalMath.log(x, mc);
             case "log":
-                return BigDecimalMath.log10(x, mc); // log10
+                return BigDecimalMath.log10(x, mc);
             case "exp":
                 return BigDecimalMath.exp(x, mc);
             case "abs":
